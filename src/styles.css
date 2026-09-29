@@ -215,16 +215,3 @@
   .today-hero { flex-direction: column; }.add-task { grid-template-columns: 1fr; }.task-row { grid-template-columns: auto minmax(0,1fr); }.task-row > .sig-chip { grid-column: 2; }.page-header h1 { font-size: 1.5rem; }.document-toolbar { align-items: stretch; }.segments { width: 100%; }.segments button { flex: none; }.score-number { font-size: 3rem; }
 }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
-
-.auth-page { min-height: 100vh; display: grid; place-items: center; padding: 1.5rem; background: var(--background); }
-.auth-card { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 0.9rem; padding: 2rem; }
-.auth-card h1 { font-size: 1.5rem; font-weight: 800; }
-.auth-card p { color: var(--muted-foreground); }
-.auth-card label { display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.85rem; font-weight: 700; }
-.auth-card input, .auth-card select { border: 1px solid var(--border); border-radius: 0.6rem; padding: 0.6rem 0.75rem; font-weight: 500; background: var(--background); color: var(--foreground); }
-.auth-card .sig-button { justify-content: center; text-align: center; }
-.auth-switch { background: none; border: 0; color: var(--primary); font-weight: 700; cursor: pointer; }
-.auth-err { color: var(--destructive) !important; font-size: 0.85rem; }
-.auth-ok { color: var(--primary) !important; font-size: 0.85rem; }
-.nav-user { margin-top: auto; padding: 0.75rem; font-size: 0.8rem; display: flex; flex-direction: column; gap: 0.4rem; }
-.nav-user small { color: var(--muted-foreground); }
