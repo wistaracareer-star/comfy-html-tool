@@ -25,7 +25,7 @@ import {
   Upload,
   X,
 } from "lucide-react";
-import { useMemo, useRef, useState, type DragEvent, type FormEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type DragEvent, type FormEvent } from "react";
 
 type View = "hari" | "papan" | "minta" | "dok" | "dash" | "kpi";
 type Task = { title: string; project: string; hours: number; done: boolean };
