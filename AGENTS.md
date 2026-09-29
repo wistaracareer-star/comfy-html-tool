@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep SIGAP as a single session-based React workspace because the supplied prototype intentionally resets example data on reload.
