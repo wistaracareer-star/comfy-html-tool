@@ -1,3 +1,6 @@
+import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
 import {
   ArrowLeft,
   ArrowRight,
@@ -22,7 +25,7 @@ import {
   Upload,
   X,
 } from "lucide-react";
-import { useMemo, useRef, useState, type DragEvent, type FormEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type DragEvent, type FormEvent } from "react";
 
 type View = "hari" | "papan" | "minta" | "dok" | "dash" | "kpi";
 type Task = { title: string; project: string; hours: number; done: boolean };
@@ -110,6 +113,25 @@ function statusForCard(card: Card) {
   if (card.due <= 0) return <Chip tone="bad">Jatuh tempo</Chip>;
   if (card.due <= 2) return <Chip tone="warn">{card.due} hari lagi</Chip>;
   return <Chip>{card.due} hari lagi</Chip>;
+}
+
+function NavUser() {
+  const navigate = useNavigate();
+  const qc = useQueryClient();
+  const [profile, setProfile] = useState<{ display_name: string; division: string } | null>(null);
+  useEffect(() => {
+    supabase.auth.getUser().then(async ({ data }) => {
+      if (!data.user) return;
+      const { data: p } = await supabase.from("profiles").select("display_name, division").eq("id", data.user.id).maybeSingle();
+      if (p) setProfile(p);
+    });
+  }, []);
+  async function signOut() {
+    await qc.cancelQueries(); qc.clear();
+    await supabase.auth.signOut();
+    navigate({ to: "/auth", replace: true });
+  }
+  return <div className="nav-user"><b>{profile?.display_name ?? "…"}</b><small>{profile?.division ?? ""}</small><button onClick={signOut}><span>Keluar</span></button></div>;
 }
 
 export function SigapApp() {
@@ -210,7 +232,7 @@ export function SigapApp() {
 
   const currentContent = view === "hari" ? renderToday() : view === "papan" ? renderBoard() : view === "minta" ? renderRequest() : view === "dok" ? renderDocuments() : view === "dash" ? renderAlignment() : renderKpi();
 
-  return <div className="sigap-shell"><nav aria-label="Menu utama"><div className="brand"><span>S</span><b>SIGAP Project</b></div>{navItems.map((item) => { const Icon = item.icon; return <button className={view === item.id ? "active" : ""} onClick={() => setView(item.id)} key={item.id}><Icon size={19} /><span>{item.label}</span></button>; })}</nav><main>{currentContent}<p className="prototype-note">Prototipe untuk pembahasan desain. Semua data adalah contoh.</p></main><input ref={fileInput} hidden multiple type="file" accept=".jpg,.jpeg,.png,.gif,.webp,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.zip" onChange={(event) => { if (event.target.files) addFiles(event.target.files); event.target.value = ""; }} />{toast && <div className="sig-toast" role="status">{toast}</div>}{preview?.url && <div className="preview-backdrop" role="dialog" aria-modal="true" aria-label="Pratinjau gambar"><div className="preview-dialog"><Button tone="icon" aria-label="Tutup pratinjau" onClick={() => setPreview(null)}><X /></Button><img src={preview.url} alt={`Pratinjau ${preview.name}`} /></div></div>}</div>;
+  return <div className="sigap-shell"><nav aria-label="Menu utama"><div className="brand"><span>S</span><b>SIGAP Project</b></div>{navItems.map((item) => { const Icon = item.icon; return <button className={view === item.id ? "active" : ""} onClick={() => setView(item.id)} key={item.id}><Icon size={19} /><span>{item.label}</span></button>; })}<NavUser /></nav><main>{currentContent}<p className="prototype-note">Prototipe untuk pembahasan desain. Semua data adalah contoh.</p></main><input ref={fileInput} hidden multiple type="file" accept=".jpg,.jpeg,.png,.gif,.webp,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.zip" onChange={(event) => { if (event.target.files) addFiles(event.target.files); event.target.value = ""; }} />{toast && <div className="sig-toast" role="status">{toast}</div>}{preview?.url && <div className="preview-backdrop" role="dialog" aria-modal="true" aria-label="Pratinjau gambar"><div className="preview-dialog"><Button tone="icon" aria-label="Tutup pratinjau" onClick={() => setPreview(null)}><X /></Button><img src={preview.url} alt={`Pratinjau ${preview.name}`} /></div></div>}</div>;
 }
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) { return <label className="form-field"><span>{label}</span>{children}</label>; }
