@@ -1,5 +1,13 @@
 {
   "version": "7",
   "dialect": "postgresql",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1790733693141,
+      "tag": "0000_sigap_roles_and_data",
+      "breakpoints": true
+    }
+  ]
 }
