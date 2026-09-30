@@ -42,7 +42,7 @@ function TeamPage() {
     setMsg("");
     const res = patch.role
       ? await supabase.from("user_roles").update({ role: patch.role }).eq("user_id", id)
-      : await supabase.from("profiles").update({ division: patch.division }).eq("id", id);
+      : await supabase.from("profiles").update({ division: patch.division ?? "HRD" }).eq("id", id);
     if (res.error) setMsg(res.error.message); else setMsg("Tersimpan");
     qc.invalidateQueries({ queryKey: ["team"] });
     if (id === me?.id) qc.invalidateQueries({ queryKey: ["me"] });
