@@ -1,5 +1,27 @@
 {
   "version": "7",
   "dialect": "postgresql",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1790733693141,
+      "tag": "0000_sigap_roles_and_data",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1790733728761,
+      "tag": "0001_documents_storage_policies",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1790733756624,
+      "tag": "0002_manager_manage_roles",
+      "breakpoints": true
+    }
+  ]
 }

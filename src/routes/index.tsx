@@ -1,5 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { SigapApp } from "@/components/SigapApp";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -16,5 +15,15 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  return <SigapApp />;
+  return (
+    <div className="auth-page">
+      <div className="sig-card auth-card">
+        <div className="brand"><span>S</span><b>SIGAP Project</b></div>
+        <h1>Ruang kerja kolaborasi lintas divisi</h1>
+        <p className="muted-copy">Task harian, papan lintas divisi, permintaan bantuan, dokumen, sasaran bersama, dan KPI untuk 15 divisi — dengan akses berbeda untuk Manager, SPV, dan Staf.</p>
+        <Link to="/app" className="sig-button sig-button-primary">Buka ruang kerja</Link>
+        <Link to="/auth" className="sig-button sig-button-soft">Masuk atau daftar</Link>
+      </div>
+    </div>
+  );
 }

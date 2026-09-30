@@ -14,6 +14,213 @@ export type Database = {
   }
   public: {
     Tables: {
+      board_cards: {
+        Row: {
+          col: number
+          created_at: string
+          created_by: string
+          due_date: string
+          from_division: string
+          id: string
+          on_time: boolean | null
+          title: string
+          to_division: string
+        }
+        Insert: {
+          col?: number
+          created_at?: string
+          created_by?: string
+          due_date?: string
+          from_division: string
+          id?: string
+          on_time?: boolean | null
+          title: string
+          to_division: string
+        }
+        Update: {
+          col?: number
+          created_at?: string
+          created_by?: string
+          due_date?: string
+          from_division?: string
+          id?: string
+          on_time?: boolean | null
+          title?: string
+          to_division?: string
+        }
+        Relationships: []
+      }
+      daily_reports: {
+        Row: {
+          created_at: string
+          division: string
+          hours: number
+          id: string
+          report_date: string
+          tasks_done: number
+          tasks_total: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          division?: string
+          hours?: number
+          id?: string
+          report_date?: string
+          tasks_done?: number
+          tasks_total?: number
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          division?: string
+          hours?: number
+          id?: string
+          report_date?: string
+          tasks_done?: number
+          tasks_total?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
+      documents: {
+        Row: {
+          category: string
+          context: string
+          created_at: string
+          division: string
+          id: string
+          mime: string | null
+          name: string
+          size: number
+          storage_path: string | null
+          uploaded_by: string
+          uploader_name: string
+        }
+        Insert: {
+          category?: string
+          context?: string
+          created_at?: string
+          division?: string
+          id?: string
+          mime?: string | null
+          name: string
+          size?: number
+          storage_path?: string | null
+          uploaded_by?: string
+          uploader_name?: string
+        }
+        Update: {
+          category?: string
+          context?: string
+          created_at?: string
+          division?: string
+          id?: string
+          mime?: string | null
+          name?: string
+          size?: number
+          storage_path?: string | null
+          uploaded_by?: string
+          uploader_name?: string
+        }
+        Relationships: []
+      }
+      help_requests: {
+        Row: {
+          card_id: string | null
+          created_at: string
+          created_by: string
+          due_days: number
+          from_division: string
+          goal: string | null
+          id: string
+          status: string
+          title: string
+          to_division: string
+        }
+        Insert: {
+          card_id?: string | null
+          created_at?: string
+          created_by?: string
+          due_days?: number
+          from_division?: string
+          goal?: string | null
+          id?: string
+          status?: string
+          title: string
+          to_division: string
+        }
+        Update: {
+          card_id?: string | null
+          created_at?: string
+          created_by?: string
+          due_days?: number
+          from_division?: string
+          goal?: string | null
+          id?: string
+          status?: string
+          title?: string
+          to_division?: string
+        }
+        Relationships: []
+      }
+      kpi_reviews: {
+        Row: {
+          id: string
+          note: string
+          period: string
+          reviewer_id: string | null
+          updated_at: string
+          user_id: string
+          work_score: number
+        }
+        Insert: {
+          id?: string
+          note?: string
+          period: string
+          reviewer_id?: string | null
+          updated_at?: string
+          user_id: string
+          work_score?: number
+        }
+        Update: {
+          id?: string
+          note?: string
+          period?: string
+          reviewer_id?: string | null
+          updated_at?: string
+          user_id?: string
+          work_score?: number
+        }
+        Relationships: []
+      }
+      obstacles: {
+        Row: {
+          created_at: string
+          division: string
+          id: string
+          note: string
+          resolved: boolean
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          division?: string
+          id?: string
+          note: string
+          resolved?: boolean
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          division?: string
+          id?: string
+          note?: string
+          resolved?: boolean
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
@@ -38,15 +245,133 @@ export type Database = {
         }
         Relationships: []
       }
+      shared_goals: {
+        Row: {
+          created_at: string
+          division: string
+          id: string
+          linked: boolean
+          progress: number
+          target: string
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          division: string
+          id?: string
+          linked?: boolean
+          progress?: number
+          target?: string
+          title: string
+        }
+        Update: {
+          created_at?: string
+          division?: string
+          id?: string
+          linked?: boolean
+          progress?: number
+          target?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      sharing_sessions: {
+        Row: {
+          created_at: string
+          created_by: string
+          division: string
+          id: string
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string
+          division?: string
+          id?: string
+          title?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          division?: string
+          id?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      tasks: {
+        Row: {
+          created_at: string
+          division: string
+          done: boolean
+          hours: number
+          id: string
+          project: string
+          task_date: string
+          title: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          division?: string
+          done?: boolean
+          hours?: number
+          id?: string
+          project?: string
+          task_date?: string
+          title: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          division?: string
+          done?: boolean
+          hours?: number
+          id?: string
+          project?: string
+          task_date?: string
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      is_manager: { Args: never; Returns: boolean }
+      is_spv_of: { Args: { _division: string }; Returns: boolean }
+      my_division: { Args: never; Returns: string }
+      user_division: { Args: { _user_id: string }; Returns: string }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "manager" | "spv" | "staf"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -173,6 +498,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["manager", "spv", "staf"],
+    },
   },
 } as const
