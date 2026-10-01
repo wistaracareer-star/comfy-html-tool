@@ -164,6 +164,65 @@ export type Database = {
         }
         Relationships: []
       }
+      kpi_entries: {
+        Row: {
+          corrected_at: string | null
+          corrected_by: string | null
+          corrected_value_a: number | null
+          corrected_value_b: number | null
+          correction_reason: string | null
+          created_at: string
+          document_id: string | null
+          entry_date: string
+          id: string
+          kpi_code: string
+          note: string
+          user_id: string
+          value_a: number
+          value_b: number | null
+        }
+        Insert: {
+          corrected_at?: string | null
+          corrected_by?: string | null
+          corrected_value_a?: number | null
+          corrected_value_b?: number | null
+          correction_reason?: string | null
+          created_at?: string
+          document_id?: string | null
+          entry_date?: string
+          id?: string
+          kpi_code: string
+          note?: string
+          user_id: string
+          value_a: number
+          value_b?: number | null
+        }
+        Update: {
+          corrected_at?: string | null
+          corrected_by?: string | null
+          corrected_value_a?: number | null
+          corrected_value_b?: number | null
+          correction_reason?: string | null
+          created_at?: string
+          document_id?: string | null
+          entry_date?: string
+          id?: string
+          kpi_code?: string
+          note?: string
+          user_id?: string
+          value_a?: number
+          value_b?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "kpi_entries_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       kpi_reviews: {
         Row: {
           id: string
@@ -193,6 +252,50 @@ export type Database = {
           work_score?: number
         }
         Relationships: []
+      }
+      kpi_settings: {
+        Row: {
+          id: string
+          kpi_code: string
+          objective: string | null
+          period: string
+          target: number | null
+          updated_at: string
+          updated_by: string
+          user_id: string
+          weight: number
+        }
+        Insert: {
+          id?: string
+          kpi_code: string
+          objective?: string | null
+          period: string
+          target?: number | null
+          updated_at?: string
+          updated_by?: string
+          user_id: string
+          weight?: number
+        }
+        Update: {
+          id?: string
+          kpi_code?: string
+          objective?: string | null
+          period?: string
+          target?: number | null
+          updated_at?: string
+          updated_by?: string
+          user_id?: string
+          weight?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "kpi_settings_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       obstacles: {
         Row: {
